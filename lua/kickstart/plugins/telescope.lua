@@ -55,37 +55,40 @@ return {
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
-        --
         -- defaults = {
         --   mappings = {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        --pickers = {},
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
         },
       }
-
+      local function add_theme(telescope_command)
+        return function()
+          telescope_command(require('telescope.themes').get_ivy())
+        end
+      end
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>fa', builtin.find_files, { desc = '[F]ind [A]ll files' })
-      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current [W]ord' })
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
-      vim.keymap.set('n', '<leader>ff', builtin.git_files, { desc = '[F]ind [F]ile Git in repository' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]epo' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>sh', add_theme(builtin.help_tags), { desc = '[S]earch [H]elp' })
+      vim.keymap.set('n', '<leader>sk', add_theme(builtin.keymaps), { desc = '[S]earch [K]eymaps' })
+      vim.keymap.set('n', '<leader>fa', add_theme(builtin.find_files), { desc = '[F]ind [A]ll files' })
+      vim.keymap.set('n', '<leader>ss', add_theme(builtin.builtin), { desc = '[S]earch [S]elect Telescope' })
+      vim.keymap.set('n', '<leader>fw', add_theme(builtin.grep_string), { desc = '[F]ind current [W]ord' })
+      vim.keymap.set('n', '<leader>fg', add_theme(builtin.live_grep), { desc = '[F]ind by [G]rep' })
+      vim.keymap.set('n', '<leader>ff', add_theme(builtin.git_files), { desc = '[F]ind [F]ile Git in repository' })
+      vim.keymap.set('n', '<leader>sd', add_theme(builtin.diagnostics), { desc = '[S]earch [D]iagnostics' })
+      vim.keymap.set('n', '<leader>sr', add_theme(builtin.resume), { desc = '[S]earch [R]epo' })
+      vim.keymap.set('n', '<leader>s.', add_theme(builtin.oldfiles), { desc = '[S]earch Recent Files ("." for repeat)' })
+      vim.keymap.set('n', '<leader>bb', add_theme(builtin.buffers), { desc = '[ ] Find existing buffers' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
