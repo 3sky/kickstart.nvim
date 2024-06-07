@@ -33,7 +33,7 @@ return {
       end
 
       -- add some git helep
-      require('mini.git').setup()
+      -- require('mini.git').setup()
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
