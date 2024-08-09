@@ -28,8 +28,8 @@ return {
         },
       },
       { 'Bilal2453/luvit-meta', lazy = true },
-      }, 
-      -- Main LSP Configuration
+    },
+    -- Main LSP Configuration
     config = function()
       -- Brief aside: **What is LSP?**
       --
