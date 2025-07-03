@@ -7,7 +7,13 @@ return {
     'rose-pine/neovim',
     name = 'rose-pine',
     priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
+    config = function()
+      ---@diagnostic disable-next-line: missing-fields
+      require('rose-pine').setup {
+        styles = {
+          comments = { italic = false }, -- Disable italics in comments
+        },
+      }
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       vim.cmd.colorscheme 'rose-pine'
