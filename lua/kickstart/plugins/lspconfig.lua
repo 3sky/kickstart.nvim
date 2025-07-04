@@ -196,7 +196,6 @@ return {
           filetypes = { 'terraform', 'tf', 'terraform-vars' },
         },
         shellcheck = {},
-        -- Zaktualizowana konfiguracja dla tflint
         tflint = {
           filetypes = { 'terraform', 'tf', 'terraform-vars' },
         },
@@ -224,7 +223,7 @@ return {
             },
           },
         },
-        tsserver = {},
+        ts_ls = {},
 
         clangd = {
           cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose' },
@@ -232,16 +231,11 @@ return {
             fallbackFlags = { '-std=c++17' },
           },
         },
-        -- gopls = {},
-        -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
         --
 
         lua_ls = {
